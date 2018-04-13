@@ -1,35 +1,62 @@
 var taget_list = {
-    "date" : [
+    "date": [
         {
             type: "edit",
             attr: [
                 "input", //type
                 "", //field's height
                 20, //field's width
+                "Edit Date",
                 -2, //top
                 178, //left
+                80 //button's width
+            ]
+        }
+    ],
+    "index": [
+        {
+            type: "edit",
+            attr: [
+                "input", //type
+                "", //field's height
+                20, //field's width
+                "Edit",
+                17, //top
+                25, //left
+                60 //button's width
+            ]
+        }
+    ],
+     "para" : [
+        {
+            type: "edit",
+            attr: [
+                "textarea", //type
+                4, //field's height
+                92, //field's width
+                "Edit", //button text
+                "auto", //top
+                175, //left
+                60 //button's width                
+            ]
+        },
+        {
+            type: "delete",
+                attr: [
+                "", "", "",
+                "Delete", //text
+                "auto", //top
+                235, //left
                 60 //button's width
             ],
         }
     ],
-    "index" : [
-        {
-            type: "edit",
-            attr: [
-                "input", //type
-                "", //field's height
-                20, //field's width
-                17, //top
-                25, //left
-                60 //button's width
-            ],
-        },
-    ],
-    "para-heading" : [
+    "para-heading": [
         {
             type: "add",
             attr: [
                 "para", //element
+                "", "",
                 "Add Paragraph", //text
                 22, //top
                 25, //left
@@ -37,34 +64,12 @@ var taget_list = {
             ],
         },
     ],
-
-    "para" : [
-        {
-            type: "edit",
-            attr: [
-                "textarea", //type
-                4, //field's height
-                92, //field's width
-                "auto", //top
-                175, //left
-                60 //button's width
-            ],
-        },
-        {
-            type: "delete",
-                attr: [
-                "Delete", //text
-                "auto", //top
-                235, //left
-                60 //button's width
-            ],
-        }
-    ],
-    "list-heading" : [
+    "list-heading": [
         {
             type: "add",
             attr: [
                 "list-item", //element
+                "", "",
                 "Add List Item", //text
                 22, //top
                 25, //left
@@ -72,13 +77,14 @@ var taget_list = {
             ],
         },
     ],
-    "list-item" : [
+    "list-item": [
         {
             type: "edit",
             attr: [
                 "textarea", //type
                 2, //field's height
                 86, //field's width
+                "Edit",
                 "auto", //top
                 175, //left
                 60 //button's width
@@ -87,6 +93,7 @@ var taget_list = {
         {
             type: "delete",
             attr: [
+                "", "", "",
                 "Delete", //text
                 "auto", //top
                 235, //left
@@ -94,11 +101,12 @@ var taget_list = {
             ],
         }
     ],
-    "table-heading" : [
+    "table-heading": [
         {
             type: "add",
             attr: [
                 "row", //element
+                "", "",
                 "Add Row", //text
                 22, //top
                 25, //left
@@ -106,39 +114,42 @@ var taget_list = {
             ],
         }
     ],
-    "symbols" : [
+    "symbols": [
         {
             type: "edit",
             attr: [
                 "input", //type
                 "", //field's height
                 30, //field's width
+                "Edit",
                 17, //top
                 50, //left
                 60 //button's width
             ],
         }
     ],
-    "cell" : [
+    "cell": [
         {
             type: "edit",
             attr: [
                 "input", //type
                 "", //field's height
                 7, //field's width
+                "Edit",
                 20, //top
                 70, //left
                 50 //button's width
             ],
         }
     ],
-    "last-cell" : [
+    "last-cell": [
         {
             type: "edit",
             attr: [
                 "textarea", //type
                 2, //field's height
                 38, //field's width
+                "Edit",
                 20, //top
                 195, //left
                 50 //button's width
@@ -147,6 +158,7 @@ var taget_list = {
         {
             type: "delete",
             attr: [
+                "", "", "",
                 "Delete Row", //text
                 20, //top
                 245, //left
@@ -154,17 +166,18 @@ var taget_list = {
             ],
         }
     ],
-    "foot-note" : [
+    "foot-note": [
         {
             type: "edit",
             attr: [
                 "textarea", //type
                 4, //field's height
                 92, //field's width
+                "Edit",
                 -25, //top
                 175, //left
                 100 //button's width
             ],
         },
-    ],
+    ]
 }

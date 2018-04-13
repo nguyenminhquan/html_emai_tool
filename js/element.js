@@ -1,101 +1,119 @@
-function EditButton(taget, attr){
-    let type = attr[0];
-    let height = attr[1];
-    let width = attr[2];
-    //button
-    let top = attr[3];
-    let left = attr[4];
-    let btn_width = attr[5];
+class myButton{
+    constructor(taget, attr){
+        this.class_name= '';
+        this.btn = '';
 
-    let btn = document.createElement('button');
-    btn.setAttribute('style', 'width: '+btn_width+'px; display: block; position: absolute; z-index: 1; left: '+left+'px;; top: '+top+'px;');
-    btn.setAttribute('id', 'btn-edit');
-    btn.innerHTML = "Edit";
+        this.taget = taget;
+        //taget type
+        this.type = attr[0];
+        //taget dimension
+        this.height = attr[1];
+        this.width = attr[2];
+        //button text
+        this.text = attr[3];
+        //button positon
+        this.top = attr[4];
+        this.left = attr[5];
+        //button dimension
+        this.btn_width = attr[6];
+    }
+    create(){
+        this.createButton();
+        this.addEvent();
+        return this.btn;
+    }
+    createButton(){
+        this.btn = document.createElement('button');
+        this.btn.setAttribute('style', `width: ${this.btn_width}px;
+                                                display: block;
+                                                position: absolute; 
+                                                z-index: 1;
+                                                left: ${this.left}px;
+                                                top: ${this.top}px;`);
+        this.btn.setAttribute('id', this.class_name);
+        this.btn.innerHTML = this.text;
+        return this.btn;
+    }
+};
 
-    btn.addEventListener("click", function(){
-        // console.dir(taget.parentNode);
-        taget.classList.remove('highlight');
-        remove_btn('btn-edit');
-        try { remove_btn('btn-delete');
-        } catch(err) {}
-        state = 2;
+class EditButton extends myButton{
+    constructor(taget, attr){
+        super(taget, attr);
+        this.class_name = 'btn-edit';
+    };
+    addEvent(){
+        this.btn.addEventListener("click", () => {
+            this.taget.classList.remove('highlight');
+            remove_btn('btn-edit');
+            try {
+                remove_btn('btn-delete');
+            } catch (err) { }
+            state = 2;
 
-        if(type=="input"){
-            taget.children[0].innerHTML = '<input id="edit" size="'+width+'" value="'+taget.children[0].innerHTML+'"></input>';
-        } else {
-            taget.children[0].innerHTML = '<textarea id="edit" cols="'+width+'" rows="'+height+'">'+taget.children[0].innerHTML+'</textarea>';
-        }
+            if (this.type == "input") {
+                this.taget.children[0].innerHTML =`<input id="edit" size=${this.width}  value="${this.taget.children[0].innerHTML}"></input>`;
+            } else {
+                this.taget.children[0].innerHTML = `<textarea id="edit" cols="${this.width}"rows="${this.height}">${this.taget.children[0].innerHTML}</textarea>`;
+            }
 
-        edit = document.getElementById('edit');
-        edit.focus();
+            let edit = document.getElementById('edit');
+            edit.focus();
 
-        edit.addEventListener("focusout", function(){
-            taget.children[0].innerHTML = edit.value;
+            edit.addEventListener("focusout", () => {
+                this.taget.children[0].innerHTML = edit.value;
+                state = 0;
+            });
+        });
+    }
+}
+
+class DeleteButton extends myButton{
+    constructor(taget, attr) {
+        super(taget, attr);
+        this.class_name = 'btn-delete';
+    };
+    addEvent(){
+        this.btn.addEventListener("click", () => {
+
+            if (this.taget.parentNode.localName == "tr") {
+                let index = getChildIndex(this.taget.parentNode);
+                this.taget.parentNode.parentNode.removeChild(this.taget.parentNode.parentNode.children[index]);
+
+            } else {
+                let index = getChildIndex(this.taget);
+                this.taget.parentNode.removeChild(this.taget.parentNode.children[index]);
+            }
             state = 0;
         });
-    });
-    return btn;  
+    }
 }
 
-function DeleteButton(taget, attr){
-    //button
-    let text = attr[0];
-    let top = attr[1];
-    let left = attr[2];
-    let btn_width = attr[3];
-
-    let btn = document.createElement('button');
-    btn.setAttribute('style', 'width: '+btn_width+'px; display: block; position: absolute; z-index: 1; left: '+left+'px;; top: '+top+'px;');
-    btn.setAttribute('id', 'btn-delete');
-    btn.innerHTML = text;
-
-    btn.addEventListener("click", function(){
-        
-        if(taget.parentNode.localName == "tr"){
-            let index = getChildIndex(taget.parentNode);
-            taget.parentNode.parentNode.removeChild(taget.parentNode.parentNode.children[index]);
-
-        } else {
-            let index = getChildIndex(taget);
-            taget.parentNode.removeChild(taget.parentNode.children[index]);
-        }
-        state = 0;
-    });
-    return btn;
-}
-
-function AddButton(taget, attr){
-    //element
-    let elem_type = attr[0];
-    //button
-    let text = attr[1];
-    let top = attr[2];
-    let left = attr[3];
-    let btn_width = attr[4];
-
-    let btn = document.createElement('button');
-    btn.setAttribute('style', 'width: '+btn_width+'px; display: block; position: absolute; z-index: 1; left: '+left+'px;; top: '+top+'px;');
-    btn.setAttribute('id', 'btn-add');
-    btn.innerHTML = text;
-
-    btn.addEventListener("click", function(){
-        let new_elem;
-        switch(elem_type){
-            case "para":
-                new_elem = ParaElement();
-                taget.parentNode.appendChild(new_elem);
-                break;
-            case "list-item":
-                new_elem = ListItemElement();
-                document.getElementById('list').appendChild(new_elem);
-                break;
-            case "row":
-                new_elem = RowElement();
-                document.getElementById('table-body').appendChild(new_elem);
-                break;
-        }
-    });
-    return btn;
+class AddButton extends myButton{
+    constructor(taget, attr) {
+        super(taget, attr);
+        this.class_name = 'btn-add';
+    };
+    addEvent(){
+        this.btn.addEventListener("click", () => {
+            let new_elem;
+            switch (this.type) {
+                case "para":
+                    new_elem = ParaElement();
+                    this.taget.parentNode.appendChild(new_elem);
+                    break;
+                case "list-item":
+                    new_elem = ListItemElement();
+                    document.getElementById('list').appendChild(new_elem);
+                    break;
+                case "row":
+                    new_elem = RowElement();
+                    document.getElementById('table-body').appendChild(new_elem);
+                    break;
+                default:
+                    alert("Error");
+            }
+        });
+    }
 }
 
 function ParaElement(){

@@ -12,13 +12,13 @@ function add_event(taget, btn_list){
                 let btn_elem;
                 switch(btn.type) {
                     case "edit":
-                        btn_elem = EditButton(taget, btn.attr);
+                        btn_elem = new EditButton(taget, btn.attr).create();
                         break;
                     case "delete":
-                        btn_elem = DeleteButton(taget, btn.attr);
+                        btn_elem = new DeleteButton(taget, btn.attr).create();
                         break;
                     case "add":
-                        btn_elem = AddButton(taget, btn.attr);
+                        btn_elem = new AddButton(taget, btn.attr).create();
                         break;
                 }
                 taget.appendChild(btn_elem);
@@ -42,7 +42,7 @@ function add_event(taget, btn_list){
 }
 
 function add_events(){
-    for (var taget_name in taget_list) {
+    for (let taget_name in taget_list) {
         let tagets = document.getElementsByName(taget_name);
         for(let i=0; i<tagets.length; i++){
             add_event(tagets[i], taget_list[taget_name]);
