@@ -7,7 +7,7 @@ var taget_list = {
                 "", //field's height
                 20, //field's width
                 "Edit Date",
-                -2, //top
+                0, //top
                 178, //left
                 80 //button's width
             ]
@@ -136,7 +136,7 @@ var taget_list = {
                 "", //field's height
                 7, //field's width
                 "Edit",
-                20, //top
+                50, //top %
                 70, //left
                 50 //button's width
             ],

@@ -29,10 +29,9 @@ class myButton{
                                                 position: absolute; 
                                                 z-index: 1;
                                                 left: ${this.left}px;
-                                                top: ${this.top}px;`);
+                                                top: ${this.top}%;`);
         this.btn.setAttribute('id', this.class_name);
         this.btn.innerHTML = this.text;
-        return this.btn;
     }
 };
 
